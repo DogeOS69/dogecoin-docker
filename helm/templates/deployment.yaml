@@ -31,7 +31,7 @@ spec:
               cp /etc/dogecoin.conf /tmp/dogecoin.conf
               echo "" >> /tmp/dogecoin.conf
               echo "rpcpassword=$(cat /etc/dogecoin-secrets/rpcpassword)" >> /tmp/dogecoin.conf
-              /wowmuchdocker/x86_64/bin/dogecoind -conf=/tmp/dogecoin.conf -datadir=/dogecoin-data -printtoconsole
+              /wowmuchdocker/x86_64/bin/dogecoind -conf=/tmp/dogecoin.conf -datadir=/dogecoin-data
           lifecycle:
             preStop:
               exec:
