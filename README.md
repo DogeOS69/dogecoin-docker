@@ -9,7 +9,7 @@
 ## Accessing dogecoin-cli via kubectl
 
 ```
-kubectl exec dogecoin-88c4bd4dc-tt85j -- /wowmuchdocker/x86_64/bin/dogecoin-cli -conf=/tmp/dogecoin.conf getblockchaininfo
+kubectl exec dogecoin-88c4bd4dc-tt85j -- /dogecoin/bin/dogecoin-cli -conf=/tmp/dogecoin.conf getblockchaininfo
 ```
 
 - Replace `dogecoin-88c4bd4dc-tt85j` with the actual pod from `kubectl get pods`
