@@ -5,7 +5,7 @@ dogecoinConf:
   disablewallet: 1
   rpcuser: user
   server: 1
-  testnet: 1
+  testnet: 0
   printtoconsole: 1
   rpcbind: 0.0.0.0  # Bind to all interfaces for cluster access
   rpcallowip: 10.0.0.0/8  # Allow cluster pod CIDR (adjust if needed)
@@ -21,12 +21,12 @@ image:
 
 service:
   type: NodePort
-  port: 44556 # 44556 for testnet, 22556 for mainnet
-  rpcPort: 44555  # 44555 for testnet, 22555 for mainnet
+  port: 22556 # 44556 for testnet, 22556 for mainnet
+  rpcPort: 22555  # 44555 for testnet, 22555 for mainnet
 
 # Storage
 storage:
-  size: 50Gi # Should be > 200Gi for mainnet
+  size: 250Gi # Should be > 200Gi for mainnet
 
 nodeSelector: {}
 
