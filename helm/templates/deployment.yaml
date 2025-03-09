@@ -47,6 +47,11 @@ spec:
               mountPath: /etc/dogecoin-secrets
             - name: dogecoin-data
               mountPath: /dogecoin-data
+          resources:
+            requests:
+              memory: "4Gi"
+            limits:
+              memory: "6Gi"
           ports:
             - name: dogecoind
               containerPort: {{ .Values.service.port }}
@@ -55,14 +60,15 @@ spec:
               containerPort: {{ .Values.service.rpcPort }}
               protocol: TCP
           livenessProbe:
-            initialDelaySeconds: 600
+            initialDelaySeconds: 120
+            periodSeconds: 30
             tcpSocket:
-              port: dogecoind
+              port: rpc
           readinessProbe:
             initialDelaySeconds: 60
             periodSeconds: 30
             tcpSocket:
-              port: dogecoind
+              port: rpc
       volumes:
         - name: config-volume
           configMap:
