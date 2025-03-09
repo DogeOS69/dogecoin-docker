@@ -4,7 +4,7 @@
 2. Update the image in values.yaml
 3. Install with overridden rpcPassword
    - `helm install dogecoin . --set rpcPassword=password_test --namespace default`
-   - Note: the overriden rpc secret should be set on the first install but not overwritten
+   - Note: the overriden rpc secret will be set on the first install but should not overwritten subsequently
 
 ## Accessing dogecoin-cli via kubectl
 
@@ -35,7 +35,7 @@ kubectl run -i --tty --rm debug --image=busybox --restart=Never -n default -- sh
 Make an RPC from the pod, using the ip and credentials
 
 ```
-# wget -qO- http://user:password_test@10.4.5.11:44555/ --post-data='{"jsonrpc": "1.0", "id":"test", "method": "getblockchaininfo", "params": []}'
+# wget -qO- http://user:password_test@10.8.156.248:44555/ --post-data='{"jsonrpc": "1.0", "id":"test", "method": "getblockchaininfo", "params": []}'
 
 {"result":{"chain":"test","blocks":217339,"headers":3499999,"bestblockhash":"2b175628405541cb5ba1f0329ff73985eab84e5bb94aaeed5b4dded130431434","difficulty":0.0002764590388906048,"mediantime":1412894572,"verificationprogress":0.04991828136432626,"initialblockdownload":true,"chainwork":"000000000000000000000000000000000000000000000000000000e216d503b2","size_on_disk":216713255,"pruned":false,"softforks":[{"id":"bip34","version":2,"reject":{"status":false}},{"id":"bip66","version":3,"reject":{"status":false}},{"id":"bip65","version":4,"reject":{"status":false}}],"bip9_softforks":{"csv":{"status":"defined","startTime":1456790400,"timeout":1493596800,"since":0}},"warnings":""},"error":null,"id":"test"}
 ```
