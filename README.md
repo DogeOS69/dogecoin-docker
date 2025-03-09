@@ -1,8 +1,7 @@
 ## Deploy dogecoin to k8s
 
 1. Build and push the container
-2. Update the image in values.yaml
-3. Install with overridden rpcPassword
+2. Install with overridden rpcPassword
    - `helm install dogecoin . --set rpcPassword=password_test --namespace default`
    - Note: rpcPassword override creates a secret which is copied into the dogecoin.conf when the container starts
 
