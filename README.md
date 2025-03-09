@@ -1,4 +1,4 @@
-## Deploy dogecoind to k8s
+## Deploy dogecoin to k8s
 
 1. Build and push the container
 2. Update the image in values.yaml
