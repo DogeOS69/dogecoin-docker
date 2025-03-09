@@ -3,7 +3,7 @@
 1. Build and push the container
 2. Update the image in values.yaml
 3. Install with overridden rpcPassword
-   - `helm install dogecoin . --set rpcPassword=password --namespace default`
+   - `helm install dogecoin . --set rpcPassword=password_test --namespace default`
    - Note: the overriden rpc secret should be set on the first install but not overwritten
 
 ## Accessing dogecoin-cli via kubectl
