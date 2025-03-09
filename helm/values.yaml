@@ -1,0 +1,34 @@
+replicaCount: 1
+namespace: default
+
+dogecoinConf:
+  disablewallet: 1
+  rpcuser: user
+  server: 1
+  testnet: 1
+  rpcbind: 0.0.0.0  # Bind to all interfaces for cluster access
+  rpcallowip: 10.0.0.0/8  # Allow cluster pod CIDR (adjust if needed)
+  listen: 0
+
+rpcPassword: password # override this with a secret
+
+image:
+  repository: "gcr.io/social-wallet-324800/dogecoind"
+  pullPolicy: Always
+  # Overrides the image tag whose default is the chart appVersion.
+  # tag: "1.14.9"
+
+service:
+  type: NodePort
+  port: 44556 # 44556 for testnet, 22556 for mainnet
+  rpcPort: 44555  # 44555 for testnet, 22555 for mainnet
+
+# Storage
+storage:
+  size: 50Gi # Should be 200Gi for mainnet
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}

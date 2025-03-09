@@ -1,0 +1,87 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "dogecoin.fullname" . }}
+  labels:
+    {{- include "dogecoin.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 0  # No extra pods during update
+      maxUnavailable: 1  # Allow one pod to be down
+  selector:
+    matchLabels:
+      {{- include "dogecoin.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "dogecoin.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          # Inject the secret into the config file
+          command:
+            - /bin/sh
+            - -c
+            - |
+              cp /etc/dogecoin.conf /tmp/dogecoin.conf
+              echo "" >> /tmp/dogecoin.conf
+              echo "rpcpassword=$(cat /etc/dogecoin-secrets/rpcpassword)" >> /tmp/dogecoin.conf
+              /wowmuchdocker/x86_64/bin/dogecoind -conf=/tmp/dogecoin.conf -datadir=/dogecoin-data -printtoconsole
+          lifecycle:
+            preStop:
+              exec:
+                command:
+                  - /wowmuchdocker/x86_64/bin/dogecoin-cli
+                  - -conf=/tmp/dogecoin.conf
+                  - stop
+          volumeMounts:
+            - name: config-volume
+              mountPath: /etc/dogecoin.conf
+              subPath: dogecoin.conf
+            - name: secret-volume
+              mountPath: /etc/dogecoin-secrets
+            - name: dogecoin-data
+              mountPath: /dogecoin-data
+          ports:
+            - name: dogecoind
+              containerPort: {{ .Values.service.port }}
+              protocol: TCP
+            - name: rpc
+              containerPort: {{ .Values.service.rpcPort }}
+              protocol: TCP
+          livenessProbe:
+            initialDelaySeconds: 600
+            tcpSocket:
+              port: dogecoind
+          readinessProbe:
+            initialDelaySeconds: 60
+            periodSeconds: 30
+            tcpSocket:
+              port: dogecoind
+      volumes:
+        - name: config-volume
+          configMap:
+            name: dogecoin-config
+        - name: secret-volume
+          secret:
+            secretName: dogecoin-rpc-secret
+        - name: dogecoin-data
+          persistentVolumeClaim:
+            claimName: dogecoin-data
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

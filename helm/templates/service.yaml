@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "dogecoin.fullname" . }}
+  labels:
+    {{- include "dogecoin.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}  # NodePort
+  ports:
+    - name: dogecoind
+      port: {{ .Values.service.port }}  # 44556 from values.yaml
+      targetPort: dogecoind  # Matches Deployment's named port
+      protocol: TCP
+    - name: rpc
+      port: {{ .Values.service.rpcPort }}  # 44555 from values.yaml
+      targetPort: rpc  # Matches Deployment's named port
+      protocol: TCP
+  selector:
+    {{- include "dogecoin.selectorLabels" . | nindent 4 }}
