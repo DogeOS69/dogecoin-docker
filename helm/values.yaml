@@ -20,7 +20,7 @@ image:
   # tag: "1.14.9"
 
 service:
-  type: NodePort
+  type: ClusterIP
   port: 44556 # 44556 for testnet, 22556 for mainnet
   rpcPort: 44555  # 44555 for testnet, 22555 for mainnet
 
