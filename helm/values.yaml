@@ -8,7 +8,9 @@ dogecoinConf:
   testnet: 1
   printtoconsole: 1
   rpcbind: 0.0.0.0  # Bind to all interfaces for cluster access
-  rpcallowip: 10.0.0.0/8  # Allow cluster pod CIDR (adjust if needed)
+  rpcallowip: # Allow cluster pod CIDR (adjust if needed)
+    - 192.168.0.0/16
+    - 10.100.0.0/16
   listen: 0
 
 rpcPassword: password # override this with a secret
