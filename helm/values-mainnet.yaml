@@ -6,7 +6,7 @@ dogecoinConf:
   rpcuser: user
   server: 1
   testnet: 0
-  printtoconsole: 1
+  printtoconsole: 0
   rpcbind: 0.0.0.0  # Bind to all interfaces for cluster access
   rpcallowip: 10.0.0.0/8  # Allow cluster pod CIDR (adjust if needed)
   listen: 0
