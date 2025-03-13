@@ -1,11 +1,13 @@
+# templates/pvc.yaml
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: dogecoin-data
-  namespace: {{ .Values.namespace }}
+  name: {{ include "dogecoin.fullname" . }}-data
+  namespace: {{ .Values.namespace | default "default" }}
 spec:
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
       storage: {{ .Values.storage.size | default "50Gi" }}
+  storageClassName: {{ .Values.storage.storageClassName | default "default" }}

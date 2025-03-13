@@ -6,7 +6,7 @@ dogecoinConf:
   rpcuser: user
   server: 1
   testnet: 1
-  printtoconsole: 1
+  printtoconsole: 0
   rpcbind: 0.0.0.0  # Bind to all interfaces for cluster access
   rpcallowip: # Allow cluster pod CIDR (adjust if needed)
     - 192.168.0.0/16
@@ -29,6 +29,7 @@ service:
 # Storage
 storage:
   size: 50Gi # Should be > 200Gi for mainnet
+  # storageClassName: immediate-gp2 # AWS EBS gp2
 
 nodeSelector: {}
 

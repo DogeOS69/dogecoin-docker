@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: dogecoin-config
+  name: {{ include "dogecoin.fullname" . }}-config
   namespace: {{ .Values.namespace | default "default" }}
 data:
   dogecoin.conf: |

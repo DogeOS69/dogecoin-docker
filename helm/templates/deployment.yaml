@@ -29,7 +29,6 @@ spec:
             - -c
             - |
               cp /etc/dogecoin.conf /tmp/dogecoin.conf
-              echo "" >> /tmp/dogecoin.conf
               echo "rpcpassword=$(cat /etc/dogecoin-secrets/rpcpassword)" >> /tmp/dogecoin.conf
               /dogecoin/bin/dogecoind -conf=/tmp/dogecoin.conf -datadir=/dogecoin-data
           lifecycle:
@@ -49,9 +48,9 @@ spec:
               mountPath: /dogecoin-data
           resources:
             requests:
-              memory: "4Gi"
+              memory: "2Gi"
             limits:
-              memory: "6Gi"
+              memory: "4Gi"
           ports:
             - name: dogecoind
               containerPort: {{ .Values.service.port }}
@@ -72,13 +71,13 @@ spec:
       volumes:
         - name: config-volume
           configMap:
-            name: dogecoin-config
+            name: {{ include "dogecoin.fullname" . }}-config
         - name: secret-volume
           secret:
-            secretName: dogecoin-rpc-secret
+            secretName: {{ include "dogecoin.fullname" . }}-rpc-secret
         - name: dogecoin-data
           persistentVolumeClaim:
-            claimName: dogecoin-data
+            claimName: {{ include "dogecoin.fullname" . }}-data
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
