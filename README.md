@@ -51,7 +51,7 @@ Check that you get a valid response
 {"result":{"chain":"test","blocks":217339,"headers":3499999,"bestblockhash":"2b175628405541cb5ba1f0329ff73985eab84e5bb94aaeed5b4dded130431434","difficulty":0.0002764590388906048,"mediantime":1412894572,"verificationprogress":0.04991828136432626,"initialblockdownload":true,"chainwork":"000000000000000000000000000000000000000000000000000000e216d503b2","size_on_disk":216713255,"pruned":false,"softforks":[{"id":"bip34","version":2,"reject":{"status":false}},{"id":"bip66","version":3,"reject":{"status":false}},{"id":"bip65","version":4,"reject":{"status":false}}],"bip9_softforks":{"csv":{"status":"defined","startTime":1456790400,"timeout":1493596800,"since":0}},"warnings":""},"error":null,"id":"test"}
 ```
 
-## Enabling remote RPC (AWS)
+## Enabling public RPC (AWS)
 
 1. Make sure you have the nginx ingress helm repo
 
