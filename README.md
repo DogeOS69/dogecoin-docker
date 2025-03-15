@@ -81,3 +81,28 @@ Check that you get a valid response
    ```
    curl -u "user:password_test" --data-binary '{"jsonrpc": "1.0", "id":"test", "method": "getblockchaininfo", "params": []}' -H "content-type: application/json" https://testnet.doge.xyz/
    ```
+
+## Enabling incoming p2p traffic
+
+1. Enable p2p in the `dogecoinConf` section of your `values.yaml`
+
+   - Use `listen: 1`
+
+2. Add public hosts to the `rpc-ingress.yaml` which expose the p2p port
+
+   - Default port `22556` for mainnet and `44556` for testnet
+
+3. Apply the `rpc-ingress.yaml` changes
+
+   ```
+   kubectl apply rpc-ingress.yaml
+   ```
+
+4. Check your node for incoming traffic using RPC
+
+   - `result` > 8 connections means you have incoming connections
+   - Node must me fully synched before incoming connections will appear
+
+   ```
+   curl -u "user:password_test" --data-binary '{"jsonrpc": "1.0", "id":"test", "method": "getconnectioncount", "params": []}' -H "content-type: application/json" https://testnet.doge.xyz/
+   ```
