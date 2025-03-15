@@ -1,9 +1,9 @@
 ## Deploy dogecoin to k8s
 
 1. Build and push the container
-   - Install the storage class for AWS (optional)
+2. (optional) Install the storage class for AWS
    - `kubectl apply -f immedate-gp2-storageclass.yaml`
-2. Install with overridden rpcPassword
+3. Install with overridden rpcPassword
    - `helm install dogecoin-<network> . --set rpcPassword=password_test --namespace default`
    - Replace `<network>` wtih `testnet` or `mainnet`
    - Use `-f values-mainnet.yaml` for `mainnet`
