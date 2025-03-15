@@ -1,4 +1,4 @@
-## Deploy dogecoin to k8s
+## Deploy Dogecoin to k8s
 
 1. Install the storage class for AWS
    - `kubectl apply -f immedate-gp2-storageclass.yaml`
