@@ -13,10 +13,10 @@
 ## Accessing dogecoin-cli via kubectl
 
 ```
-kubectl exec dogecoin-88c4bd4dc-tt85j -- /dogecoin/bin/dogecoin-cli -conf=/tmp/dogecoin.conf getblockchaininfo
+kubectl exec dogecoin-testnet-88c4bd4dc-tt85j -- /dogecoin/bin/dogecoin-cli -conf=/tmp/dogecoin.conf getblockchaininfo
 ```
 
-- Replace `dogecoin-88c4bd4dc-tt85j` with the actual pod from `kubectl get pods`
+- Replace `dogecoin-testnet-88c4bd4dc-tt85j` with the actual pod from `kubectl get pods`
 - Replace `getblockchaininfo` wtih any cli command
 
 ## Testing RPC from another pod
@@ -62,15 +62,15 @@ Check that you get a valid response
 
 2. Install the nginx controller
 
-   - Note: the values in the repo are specific to AWS
-   - On AWS, replace the specific subnets with your VPC public subnets
-   - Specific values may not be necessary for other providers
-
    ```
    helm upgrade --install ingress-nginx ingress-nginx \
    --namespace ingress-nginx \
    -f ingress-controller-values.yaml
    ```
+
+   - Note: the values in the repo are specific to AWS
+   - On AWS, replace the specific subnets with your VPC public subnets
+   - Specific values may not be necessary for other providers
 
 3. Have TLS secret created for the hosts defined in `ingress.yaml` and install the services-ingress
 
@@ -102,9 +102,9 @@ Check that you get a valid response
 
 4. Check your node for incoming traffic using RPC
 
-   - `result` > 8 connections means you have incoming connections
-   - Node must me fully synched before incoming connections will appear
-
    ```
    curl -u "user:password_test" --data-binary '{"jsonrpc": "1.0", "id":"test", "method": "getconnectioncount", "params": []}' -H "content-type: application/json" https://testnet.example.com/
    ```
+
+   - `result` > 8 connections means you have incoming connections
+   - Node must me fully synched before incoming connections will appear
