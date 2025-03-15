@@ -107,4 +107,4 @@ Check that you get a valid response
    ```
 
    - `result` > 8 connections means you have incoming connections
-   - Node must me fully synched before incoming connections will appear
+   - Node must be fully synched before incoming connections will appear
