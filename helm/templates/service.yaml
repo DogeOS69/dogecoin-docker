@@ -5,14 +5,14 @@ metadata:
   labels:
     {{- include "dogecoin.labels" . | nindent 4 }}
 spec:
-  type: {{ .Values.service.type }}  # NodePort
+  type: {{ .Values.service.type }}
   ports:
     - name: dogecoind
-      port: {{ .Values.service.port }}  # 44556 from values.yaml
+      port: {{ .Values.service.port }}
       targetPort: dogecoind  # Matches Deployment's named port
       protocol: TCP
     - name: rpc
-      port: {{ .Values.service.rpcPort }}  # 44555 from values.yaml
+      port: {{ .Values.service.rpcPort }}
       targetPort: rpc  # Matches Deployment's named port
       protocol: TCP
   selector:

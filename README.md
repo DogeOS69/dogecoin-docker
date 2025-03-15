@@ -72,16 +72,16 @@ Check that you get a valid response
    -f ingress-controller-values.yaml
    ```
 
-3. Have TLS secret created for the hosts defined in `rpc-ingress.yaml` and install the services-ingress
+3. Have TLS secret created for the hosts defined in `ingress.yaml` and install the services-ingress
 
    ```
-   kubectl apply rpc-ingress.yaml
+   kubectl apply ingress.yaml
    ```
 
 4. Test your RPC with a curl request
 
    ```
-   curl -u "user:password_test" --data-binary '{"jsonrpc": "1.0", "id":"test", "method": "getblockchaininfo", "params": []}' -H "content-type: application/json" https://testnet.doge.xyz/
+   curl -u "user:password_test" --data-binary '{"jsonrpc": "1.0", "id":"test", "method": "getblockchaininfo", "params": []}' -H "content-type: application/json" https://testnet.example.com/
    ```
 
 ## Enabling incoming p2p traffic
@@ -90,14 +90,14 @@ Check that you get a valid response
 
    - Use `listen: 1`
 
-2. Add public hosts to the `rpc-ingress.yaml` which expose the p2p port
+2. Add public hosts to the `ingress.yaml` which expose the p2p port
 
    - Default port `22556` for mainnet and `44556` for testnet
 
-3. Apply the `rpc-ingress.yaml` changes
+3. Apply the `ingress.yaml` changes
 
    ```
-   kubectl apply rpc-ingress.yaml
+   kubectl apply ingress.yaml
    ```
 
 4. Check your node for incoming traffic using RPC
@@ -106,5 +106,5 @@ Check that you get a valid response
    - Node must me fully synched before incoming connections will appear
 
    ```
-   curl -u "user:password_test" --data-binary '{"jsonrpc": "1.0", "id":"test", "method": "getconnectioncount", "params": []}' -H "content-type: application/json" https://testnet.doge.xyz/
+   curl -u "user:password_test" --data-binary '{"jsonrpc": "1.0", "id":"test", "method": "getconnectioncount", "params": []}' -H "content-type: application/json" https://testnet.example.com/
    ```

@@ -2,7 +2,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: dogecoin-rpc-ingress
+  name: dogecoin-ingress
   namespace: default
   annotations:
     nginx.ingress.kubernetes.io/backend-protocol: "TCP"
@@ -10,10 +10,11 @@ spec:
   ingressClassName: nginx
   tls:
   - hosts:
-    - testnet.doge.xyz
-    secretName: doge-xyz-tls
+    - testnet.example.com
+    - mainnet.example.com
+    secretName: example-com-tls
   rules:
-  - host: testnet.doge.xyz
+  - host: testnet.example.com
     http:
       paths:
       - path: /
@@ -23,7 +24,7 @@ spec:
             name: dogecoin-testnet
             port:
               number: 44555
-  - host: mainnet.doge.xyz
+  - host: mainnet.example.com
     http:
       paths:
       - path: /

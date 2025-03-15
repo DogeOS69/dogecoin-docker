@@ -6,4 +6,4 @@ controller:
       service.beta.kubernetes.io/aws-load-balancer-type: nlb
       service.beta.kubernetes.io/aws-load-balancer-nlb-target-type: ip
       service.beta.kubernetes.io/aws-load-balancer-scheme: internet-facing
-      service.beta.kubernetes.io/aws-load-balancer-subnets: subnet-02de7e6602b14f28f,subnet-03579b0c4f836d932
+      service.beta.kubernetes.io/aws-load-balancer-subnets: <subnet-1>,<subnet-2>
