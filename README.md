@@ -62,6 +62,8 @@ Check that you get a valid response
 
 2. Install the nginx controller
 
+   - Note: the values in the repo are specific to AWS
+
    ```
    helm upgrade --install ingress-nginx ingress-nginx \
    --namespace ingress-nginx \
@@ -72,4 +74,10 @@ Check that you get a valid response
 
    ```
    kubectl apply rpc-ingress.yaml
+   ```
+
+4. Test your RPC with a curl request
+
+   ```
+   curl -u "user:password_test" --data-binary '{"jsonrpc": "1.0", "id":"test", "method": "getblockchaininfo", "params": []}' -H "content-type: application/json" https://testnet.doge.xyz/
    ```
