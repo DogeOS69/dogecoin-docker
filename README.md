@@ -1,9 +1,9 @@
 ## Deploy dogecoin to k8s
 
-1. Build and push the container
-2. (optional) Install the storage class for AWS
+1. Install the storage class for AWS
    - `kubectl apply -f immedate-gp2-storageclass.yaml`
-3. Install with overridden rpcPassword
+   - May not be necessary for other cloud providers (gcloud, etc.)
+2. Install with overridden rpcPassword
    - `helm install dogecoin-<network> . --set rpcPassword=password_test --namespace default`
    - Replace `<network>` wtih `testnet` or `mainnet`
    - Use `-f values-mainnet.yaml` for `mainnet`
@@ -63,6 +63,8 @@ Check that you get a valid response
 2. Install the nginx controller
 
    - Note: the values in the repo are specific to AWS
+   - On AWS, replace the specific subnets with your VPC public subnets
+   - Specific values may not be necessary for other providers
 
    ```
    helm upgrade --install ingress-nginx ingress-nginx \
