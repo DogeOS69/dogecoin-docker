@@ -75,7 +75,7 @@ Check that you get a valid response
 3. Have TLS secret created for the hosts defined in `ingress.yaml` and install the services-ingress
 
    ```
-   kubectl apply ingress.yaml
+   kubectl apply -f ingress.yaml
    ```
 
 4. Test your RPC with a curl request
@@ -97,7 +97,7 @@ Check that you get a valid response
 3. Apply the `ingress.yaml` changes
 
    ```
-   kubectl apply ingress.yaml
+   kubectl apply -f ingress.yaml
    ```
 
 4. Check your node for incoming traffic using RPC
